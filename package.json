@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "better-sqlite3": "^12.4.1"
+  },
+  "name": "js_chatapp_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/H4RmYxDD/js_chatapp_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/H4RmYxDD/js_chatapp_project/issues"
+  },
+  "homepage": "https://github.com/H4RmYxDD/js_chatapp_project#readme"
+}
