@@ -1,3 +1,4 @@
+// ...existing code...
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -38,18 +39,25 @@ function RegisterPage() {
                 nav('/');
             })
             .catch((error) => {
-                toast.error('Register failed: ' + error.response.data.message);
+                toast.error('Register failed: ' + (error.response?.data?.message || error.message));
             });
     };
+
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        register();
+    };
+
     return (
         <>
-            <div className="register-container">
+            <form className="register-container" onSubmit={onSubmit}>
                 <p id="email">Email</p>
                 <input
                     type="text"
                     id="emailField"
                     onChange={(e) => setUser({ ...user, email: e.target.value })}
                     placeholder="Your email"
+                    value={user.email}
                 />
                 <p id="username">Username</p>
                 <input
@@ -57,6 +65,7 @@ function RegisterPage() {
                     id="usernameField"
                     onChange={(e) => setUser({ ...user, username: e.target.value })}
                     placeholder="Your username"
+                    value={user.username}
                 />
                 <p id="password">Password</p>
                 <input
@@ -64,6 +73,7 @@ function RegisterPage() {
                     id="passwordField"
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                     placeholder="Your password"
+                    value={user.password}
                 />
                 <p id="password-confirm">Confirm Password</p>
                 <input
@@ -71,11 +81,12 @@ function RegisterPage() {
                     id="passwordConfirmField"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm your password"
+                    value={confirmPassword}
                 />
-                <button id="registerButton" onClick={register}>
+                <button id="registerButton" type="submit">
                     Register
                 </button>
-            </div>
+            </form>
             <div>
                 <p>
                     Already have an account? <Link to="/">Login here</Link>

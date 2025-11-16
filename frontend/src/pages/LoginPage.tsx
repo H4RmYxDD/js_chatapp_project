@@ -1,3 +1,4 @@
+// ...existing code...
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { apiClient } from '../api/apiClient';
@@ -20,7 +21,7 @@ function LoginPage() {
                 nav('/main');
             })
             .catch((error) => {
-                toast.error('Login failed: ' + error.response.data.message);
+                toast.error('Login failed: ' + error.response?.data?.message || error.message);
             });
     };
     const login = () => {
@@ -30,27 +31,36 @@ function LoginPage() {
         }
         tryLogin();
     };
+
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        login();
+    };
+
     return (
         <>
-            <div className="login-container">
-                <p id="username">Username</p>
+            <form className="login-container" onSubmit={onSubmit}>
+                <label htmlFor="usernameField">Username</label>
                 <input
                     type="text"
                     id="usernameField"
                     onChange={(e) => setUser({ ...user, username: e.target.value })}
                     placeholder="Your username"
+                    value={user.username}
                 />
-                <p id="password">Password</p>
+                <label htmlFor="passwordField">Password</label>
                 <input
                     type="password"
                     id="passwordField"
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                     placeholder="Your password"
+                    value={user.password}
                 />
-                <button onClick={login} id="loginButton">
+                <button type="submit" id="loginButton">
                     Login
                 </button>
-            </div>
+            </form>
+
             <div>
                 <p>
                     You dont have an account yet? <Link to="/register">Register here</Link>
