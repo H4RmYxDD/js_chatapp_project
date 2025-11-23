@@ -10,6 +10,9 @@ import MainPage from './pages/MainPage.tsx';
 import UsersPage from './pages/UsersPage.tsx';
 import ConversationPage from './pages/ConversationPage.tsx';
 import ThreadPage from './pages/ThreadPage.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
+import PrivacyPage from './pages/PrivacyPage.tsx';
+import PreferencesPage from './pages/PreferencesPage.tsx';
 import AppLayout from './Components/AppLayout.tsx';
 
 createRoot(document.getElementById('root')!).render(
@@ -20,10 +23,62 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/register" element={<RegisterPage />} />
 
                 {/* wrap pages that should show header/sidebar */}
-                <Route path="/main" element={<AppLayout><MainPage /></AppLayout>} />
-                <Route path="/users" element={<AppLayout><UsersPage /></AppLayout>} />
-                <Route path="/messages/conversation/:userId" element={<AppLayout><ConversationPage /></AppLayout>} />
-                <Route path="/messages/thread/:id" element={<AppLayout><ThreadPage /></AppLayout>} />
+                <Route
+                    path="/main"
+                    element={
+                        <AppLayout>
+                            <MainPage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/users"
+                    element={
+                        <AppLayout>
+                            <UsersPage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/messages/conversation/:userId"
+                    element={
+                        <AppLayout>
+                            <ConversationPage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/messages/thread/:id"
+                    element={
+                        <AppLayout>
+                            <ThreadPage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/settings/profile"
+                    element={
+                        <AppLayout>
+                            <ProfilePage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/settings/privacy"
+                    element={
+                        <AppLayout>
+                            <PrivacyPage />
+                        </AppLayout>
+                    }
+                />
+                <Route
+                    path="/settings/preferences"
+                    element={
+                        <AppLayout>
+                            <PreferencesPage />
+                        </AppLayout>
+                    }
+                />
             </Routes>
         </BrowserRouter>
         <ToastContainer theme="colored" />

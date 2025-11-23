@@ -1,52 +1,224 @@
 /* page container */
 .main-content {
-  min-height: calc(100vh - 90px);
-  padding-top: 24px;
+    min-height: calc(100vh - 90px);
+    padding-top: 24px;
+}
+
+/* header logo adjustments */
+.app-header {
+    padding: 12px 0;
+}
+.app-header .app-logo {
+    width: 56px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+.app-header .app-container {
+    display: flex;
+    align-items: center;
 }
 
 /* layout with optional sidebar */
 .app-grid {
-  display:grid;
-  grid-template-columns: 260px 1fr;
-  gap:20px;
-  align-items:start;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    align-items: start;
 }
 
 /* sidebar */
 .sidebar {
-  width:100%;
+    width: 100%;
 }
 .sidebar .pro-sidebar-inner {
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-  border-right:1px solid rgba(255,255,255,0.02);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--panel-bg);
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-dark);
 }
-.logout-area { margin-top:auto; padding:14px; }
+
+.sidebar .pro-menu .pro-inner-item {
+    color: var(--text-dark) !important;
+}
+.sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+    color: var(--text-dark) !important;
+}
+.sidebar .pro-menu .pro-inner-item:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: var(--text) !important;
+}
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+.sidebar-header .sidebar-logo {
+    width: 44px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+.sidebar-header .sidebar-brand {
+    color: #fff;
+    font-weight: 700;
+    margin-left: 6px;
+}
+.logout-area {
+    margin-top: auto;
+    padding: 14px;
+}
 
 /* threads list */
 .threads-list {
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  max-width:900px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 900px;
 }
 .thread-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  padding:12px 14px;
-  border-radius:10px;
-  box-shadow: 0 8px 22px rgba(2,6,23,0.25);
-  border-left: 3px solid rgba(123,97,255,0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 12px 14px;
+    border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(2, 6, 23, 0.25);
+    border-left: 3px solid rgba(123, 97, 255, 0.12);
 }
-.thread-meta { display:flex; gap:12px; align-items:center; color:var(--muted); font-size:13px; margin-bottom:6px; }
-.thread-content { color:var(--text); line-height:1.45; white-space:pre-wrap; }
+.thread-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.thread-content {
+    color: var(--text);
+    line-height: 1.45;
+    white-space: pre-wrap;
+}
 
 /* small composer */
-.message-composer { display:flex; gap:8px; margin-top:10px; }
-.message-composer textarea { flex:1; min-height:56px; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color:var(--text); }
+.message-composer {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+.message-composer textarea {
+    flex: 1;
+    min-height: 56px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+}
 
 /* responsive */
-@media (max-width:900px){
-  .app-grid { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header .app-logo {
+        width: 48px;
+    }
+}
+
+/* Strong overrides for react-pro-sidebar to prevent white submenu panels
+   and ensure consistent dark appearance and contrast. Placed here so
+   AppLayout (global wrapper) enforces the same look as page-local styles. */
+.sidebar .pro-sidebar-inner,
+.sidebar.pro-sidebar,
+.sidebar .pro-menu,
+.sidebar .pro-menu .pro-sub-menu,
+.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list,
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar .pro-sidebar-inner {
+    /* Solid dark fallback so there is no light/grey band */
+    background: linear-gradient(180deg, #13395e 0%, #0f2b44 100%) !important;
+    background-color: rgba(15, 35, 60, 0.98) !important;
+    overflow-y: auto !important;
+}
+
+.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
+    /* Ensure submenu list sits on the same panel color as the sidebar */
+    background: var(--panel-bg) !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-dark) !important;
+}
+
+.sidebar .pro-menu .pro-menu-item > .pro-inner-item,
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item,
+.sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
+    color: var(--text-dark) !important;
+}
+
+.sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--text) !important;
+}
+
+/* reduce the large empty white block by ensuring submenu panels don't get a forced white background */
+.pro-sub-menu-list,
+.pro-sub-menu {
+    background: transparent !important;
+}
+
+/* subtle scrollbar that's visible but not intrusive */
+.sidebar .pro-sidebar-inner::-webkit-scrollbar {
+    width: 10px;
+}
+.sidebar .pro-sidebar-inner::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+.sidebar .pro-sidebar-inner::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+}
+.dark-mode .sidebar .pro-sidebar-inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Even broader overrides to guarantee nested lists/containers inside the
+   sidebar don't render white backgrounds from library defaults. */
+.sidebar .pro-menu,
+.sidebar .pro-menu ul,
+.sidebar .pro-menu li,
+.sidebar .pro-menu div,
+.sidebar .pro-menu a {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar .pro-menu .pro-inner-list,
+.sidebar .pro-menu .pro-inner-list > li,
+.sidebar .pro-menu .pro-inner-list li {
+    background: transparent !important;
+}
+
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* If the library outputs inline styles on deep children, these rules
+   help ensure the visual stays on the dark panel. */
+.sidebar * {
+    background-repeat: no-repeat !important;
 }

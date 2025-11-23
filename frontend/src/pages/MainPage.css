@@ -8,15 +8,15 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
     border-radius: 10px;
-    box-shadow: 0 6px 14px rgba(3,10,18,0.06);
+    box-shadow: 0 6px 14px rgba(3, 10, 18, 0.06);
     margin-bottom: 18px;
 }
 .logout-button {
     width: 100%;
     max-width: 200px;
-    background: linear-gradient(180deg,#ff6b6b 0%,#e85a5a 100%);
+    background: linear-gradient(180deg, #ff6b6b 0%, #e85a5a 100%);
     color: #fff;
     border: none;
     padding: 10px 14px;
@@ -34,30 +34,41 @@
     height: 48px;
     border-radius: 10px;
     border: none;
-    background: linear-gradient(180deg,#154264 0%,#0f324a 100%);
+    background: linear-gradient(180deg, #154264 0%, #0f324a 100%);
     color: #fff;
     font-size: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(7,22,34,0.18);
+    box-shadow: 0 8px 20px rgba(7, 22, 34, 0.18);
     transition: transform 160ms ease, opacity 160ms ease, box-shadow 160ms ease;
 }
-.menu-button:focus { outline: 3px solid rgba(25,150,200,0.18); outline-offset: 2px; }
-.menu-button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(7,22,34,0.22); }
-.menu-button.hidden { opacity: 0; transform: scale(0.94); pointer-events: none; visibility: hidden; }
+.menu-button:focus {
+    outline: 3px solid rgba(25, 150, 200, 0.18);
+    outline-offset: 2px;
+}
+.menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(7, 22, 34, 0.22);
+}
+.menu-button.hidden {
+    opacity: 0;
+    transform: scale(0.94);
+    pointer-events: none;
+    visibility: hidden;
+}
 
 .overlay {
     position: fixed;
     inset: 0;
-    left: 240px; 
-    background: rgba(0,0,0,0.45);
+    left: 240px;
+    background: rgba(0, 0, 0, 0.45);
     z-index: 1300;
 }
 
 .sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
-    color: #d6e8f6 !important;
+    color: var(--text-dark) !important;
     font-weight: 600;
     padding: 10px 12px !important;
     border-radius: 8px;
@@ -72,32 +83,32 @@
 }
 
 .sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
-    color: #bcd4ff !important;
+    color: rgba(255, 255, 255, 0.8) !important;
     padding-left: 8px !important;
     font-size: 14px !important;
 }
 
 .sidebar .pro-menu .pro-sub-menu.open > .pro-inner-item,
 .sidebar .pro-menu .pro-sub-menu > .pro-inner-item:hover {
-    background: rgba(255,255,255,0.03) !important;
-    color: #fff !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: var(--text) !important;
 }
 
 .sidebar.pro-sidebar,
 .sidebar.pro-sidebar > .pro-sidebar-inner {
-    width: 240px !important; 
+    width: 240px !important;
     position: fixed !important;
     left: 0 !important;
     top: 0 !important;
     height: 100vh !important;
     transform: translateX(-105%) !important;
-    transition: transform 260ms cubic-bezier(.2,.9,.2,1) !important;
+    transition: transform 260ms cubic-bezier(0.2, 0.9, 0.2, 1) !important;
     z-index: 1350 !important;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     background: transparent !important;
-    box-shadow: 8px 0 28px rgba(8,15,25,0.14) !important;
+    box-shadow: 8px 0 28px rgba(8, 15, 25, 0.14) !important;
 }
 
 .sidebar.pro-sidebar.open,
@@ -109,10 +120,10 @@
     height: 100% !important;
     width: 100% !important;
     padding: 22px !important;
-    background: linear-gradient(180deg,#13395e 0%,#0f2b44 100%) !important;
-    color: #d6e8f6 !important;
+    background: var(--panel-bg) !important;
+    color: var(--text-dark) !important;
     box-sizing: border-box !important;
-    border-right: 1px solid rgba(255,255,255,0.02);
+    border-right: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .sidebar-header {
@@ -121,38 +132,51 @@
     justify-content: space-between;
     gap: 8px;
     margin-bottom: 12px;
-    color: #fff;
+    color: var(--text-dark);
     font-weight: 700;
     font-size: 15px;
 }
 .close-btn {
     background: transparent;
     border: none;
-    color: #d6e8f6;
+    color: var(--text-dark);
     font-size: 20px;
     line-height: 1;
     cursor: pointer;
     padding: 4px 6px;
     border-radius: 6px;
 }
-.close-btn:hover { background: rgba(255,255,255,0.03); color: #fff; }
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+}
 
-.sidebar .pro-menu { background: transparent !important; margin:0 !important; padding:0 !important; }
-.sidebar .pro-menu .pro-menu-item { padding: 12px 10px !important; border-radius: 8px !important; }
-.sidebar .pro-menu .pro-menu-item > .pro-inner-item { color: #d6e8f6 !important; font-size:15px !important; }
+.sidebar .pro-menu {
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.sidebar .pro-menu .pro-menu-item {
+    padding: 12px 10px !important;
+    border-radius: 8px !important;
+}
+.sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+    color: var(--text-dark) !important;
+    font-size: 15px !important;
+}
 .sidebar .pro-menu .pro-menu-item:hover > .pro-inner-item,
 .sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
-    background: rgba(255,255,255,0.04) !important;
-    color: #fff !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--text) !important;
 }
 
 /* ...existing code... */
 
 .main-content {
     min-height: 100vh;
-    transition: margin-left 260ms cubic-bezier(.2,.9,.2,1);
+    transition: margin-left 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
     display: flex;
-    align-items: flex-start;     /* keep content at top */
+    align-items: flex-start; /* keep content at top */
     justify-content: flex-start; /* left align inside page */
     padding: 40px;
     box-sizing: border-box;
@@ -181,30 +205,78 @@ body.sidebar-open .main-content {
 
 /* ...existing code... */
 
-.sidebar-details summary { list-style:none; cursor:pointer; padding:10px 12px; border-radius:8px; color:#d6e8f6; display:block; }
-.sidebar-details summary::-webkit-details-marker { display:none; }
-.sidebar-details[open] summary { background: rgba(255,255,255,0.03); color:#fff; }
-.details-list { margin-top:8px; margin-left:6px; display:flex; flex-direction:column; gap:6px; }
+.sidebar-details summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #d6e8f6;
+    display: block;
+}
+.sidebar-details summary::-webkit-details-marker {
+    display: none;
+}
+.sidebar-details[open] summary {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+}
+.details-list {
+    margin-top: 8px;
+    margin-left: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
 .sidebar .pro-menu + .pro-menu,
-.sidebar .logout-area { margin-top: auto; padding-top:12px; }
-.logout-button { width:100%; background:#fff; color:#0f2b44; border:none; padding:10px 12px; border-radius:8px; font-weight:600; cursor:pointer; }
-.logout-button:hover { background:#f1f5f9; transform:translateY(-1px); }
+.sidebar .logout-area {
+    margin-top: auto;
+    padding-top: 12px;
+}
+.logout-button {
+    width: 100%;
+    background: #fff;
+    color: #0f2b44;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.logout-button:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+}
 
 .main-content {
-    min-height:100vh;
-    transition: margin-left 260ms cubic-bezier(.2,.9,.2,1);
-    display:flex;
-    align-items:flex-start;   /* changed from center */
-    justify-content:flex-start;/* changed from center */
-    padding:40px;
+    min-height: 100vh;
+    transition: margin-left 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    display: flex;
+    align-items: flex-start; /* changed from center */
+    justify-content: flex-start; /* changed from center */
+    padding: 40px;
 }
-@media (max-width:480px) {
-    .menu-button { top:12px; left:12px; width:44px; height:44px; font-size:18px; }
-    .sidebar.pro-sidebar, .sidebar .pro-sidebar-inner { width:78% !important; }
+@media (max-width: 480px) {
+    .menu-button {
+        top: 12px;
+        left: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+    .sidebar.pro-sidebar,
+    .sidebar .pro-sidebar-inner {
+        width: 78% !important;
+    }
 }
 
-.sidebar .pro-menu .pro-inner-item:focus, .menu-button:focus, .logout-button:focus, .close-btn:focus { outline:3px solid rgba(25,150,200,0.16); outline-offset:2px; }
+.sidebar .pro-menu .pro-inner-item:focus,
+.menu-button:focus,
+.logout-button:focus,
+.close-btn:focus {
+    outline: 3px solid rgba(25, 150, 200, 0.16);
+    outline-offset: 2px;
+}
 
 .logout-area {
     margin-top: auto;
@@ -213,27 +285,33 @@ body.sidebar-open .main-content {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
     border-radius: 10px;
-    box-shadow: 0 6px 14px rgba(3,10,18,0.06);
+    box-shadow: 0 6px 14px rgba(3, 10, 18, 0.06);
     margin-bottom: 18px;
 }
 
 .logout-button {
     width: 100%;
     max-width: 200px;
-    background: linear-gradient(180deg,#ff6b6b 0%,#e85a5a 100%);
+    background: linear-gradient(180deg, #ff6b6b 0%, #e85a5a 100%);
     color: #fff;
     border: none;
     padding: 10px 14px;
     border-radius: 8px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(232,90,90,0.18);
+    box-shadow: 0 6px 18px rgba(232, 90, 90, 0.18);
     transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
 }
-.logout-button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(232,90,90,0.22); }
-.logout-button:focus { outline: 3px solid rgba(255,107,107,0.18); outline-offset: 3px; }
+.logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(232, 90, 90, 0.22);
+}
+.logout-button:focus {
+    outline: 3px solid rgba(255, 107, 107, 0.18);
+    outline-offset: 3px;
+}
 
 /* threads list + cards */
 .threads-list {
@@ -245,11 +323,11 @@ body.sidebar-open .main-content {
 }
 
 .thread-card {
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.02);
     padding: 12px 14px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(7,12,18,0.04);
-    border-left: 3px solid rgba(255,255,255,0.02);
+    box-shadow: 0 4px 8px rgba(7, 12, 18, 0.04);
+    border-left: 3px solid rgba(255, 255, 255, 0.02);
 }
 
 .thread-meta {
@@ -261,9 +339,100 @@ body.sidebar-open .main-content {
     margin-bottom: 8px;
 }
 
+/* Strong overrides for react-pro-sidebar to prevent white submenu panels
+   and ensure consistent dark appearance and contrast. */
+.sidebar .pro-sidebar-inner,
+.sidebar.pro-sidebar,
+.sidebar .pro-menu,
+.sidebar .pro-menu .pro-sub-menu,
+.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list,
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar .pro-sidebar-inner {
+    /* Solid dark fallback so there is no light/grey band */
+    background: linear-gradient(180deg, #13395e 0%, #0f2b44 100%) !important;
+    background-color: rgba(15, 35, 60, 0.98) !important;
+    overflow-y: auto !important;
+}
+
+.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
+    /* Ensure submenu list sits on the same panel color as the sidebar */
+    background: var(--panel-bg) !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-dark) !important;
+}
+
+.sidebar .pro-menu .pro-menu-item > .pro-inner-item,
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item,
+.sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
+    color: var(--text-dark) !important;
+}
+
+.sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--text) !important;
+}
+
+/* reduce the large empty white block by ensuring submenu panels don't get a forced white background */
+.pro-sub-menu-list,
+.pro-sub-menu {
+    background: transparent !important;
+}
+
+/* subtle scrollbar that's visible but not intrusive */
+.sidebar .pro-sidebar-inner::-webkit-scrollbar {
+    width: 10px;
+}
+.sidebar .pro-sidebar-inner::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+.sidebar .pro-sidebar-inner::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+}
+.dark-mode .sidebar .pro-sidebar-inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.06);
+}
+
 .thread-time {
     margin-left: auto;
-    color: rgba(255,255,255,0.6);
+
+    /* Broad fallbacks: force any nested lists or containers inside the sidebar
+   to inherit the dark panel background and remove forced white blocks. */
+    .sidebar .pro-menu,
+    .sidebar .pro-menu ul,
+    .sidebar .pro-menu li,
+    .sidebar .pro-menu div,
+    .sidebar .pro-menu a {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: var(--text-dark) !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .sidebar .pro-menu .pro-inner-list,
+    .sidebar .pro-menu .pro-inner-list > li,
+    .sidebar .pro-menu .pro-inner-list li {
+        background: transparent !important;
+    }
+
+    /* Make submenu text more legible on dark bg */
+    .sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* Prevent any default white background on <details> fallback panels */
+    .sidebar-details,
+    .sidebar-details * {
+        background: transparent !important;
+        color: var(--text-dark) !important;
+    }
+    color: rgba(255, 255, 255, 0.6);
     font-size: 12px;
 }
 

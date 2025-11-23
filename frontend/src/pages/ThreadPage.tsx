@@ -19,27 +19,30 @@ const ThreadPage: React.FC = () => {
     const [replyContent, setReplyContent] = useState('');
 
     useEffect(() => {
-        apiClient.get(`/messages/thread/${id}`)
-            .then(res => setThread(res.data))
-            .catch(err => console.error(err));
+        apiClient
+            .get(`/messages/thread/${id}`)
+            .then((res) => setThread(res.data))
+            .catch((err) => console.error(err));
     }, [id]);
 
     const handleReply = () => {
         if (!replyContent.trim()) return;
 
         const originalMessage = thread[0];
-        apiClient.post('/messages', {
-            recipientId: originalMessage.senderId === Number(localStorage.getItem('userId')) 
-                ? originalMessage.receiverId 
-                : originalMessage.senderId,
-            content: replyContent,
-            parentId: id
-        }).then(() => {
-            setReplyContent('');
-            // Refresh thread
-            apiClient.get(`/messages/thread/${id}`)
-                .then(res => setThread(res.data));
-        });
+        apiClient
+            .post('/messages', {
+                recipientId:
+                    originalMessage.senderId === Number(localStorage.getItem('userId'))
+                        ? originalMessage.receiverId
+                        : originalMessage.senderId,
+                content: replyContent,
+                parentId: id,
+            })
+            .then(() => {
+                setReplyContent('');
+                // Refresh thread
+                apiClient.get(`/messages/thread/${id}`).then((res) => setThread(res.data));
+            });
     };
 
     return (
@@ -47,23 +50,38 @@ const ThreadPage: React.FC = () => {
             <Button variant="secondary" onClick={() => navigate(-1)} className="mb-3">
                 Back
             </Button>
-            
+
             <h3>Message Thread</h3>
-            
+
             <Card>
                 <Card.Body>
-                    {thread.map(msg => (
-                        <div key={msg.id} className={`mb-3 p-3 border rounded ${
-                            msg.senderId === Number(localStorage.getItem('userId')) 
-                                ? 'bg-primary text-white' 
-                                : 'bg-light'
-                        }`}>
-                            <div>{msg.content}</div>
-                            <small className="text-muted">
-                                {new Date(msg.createdAt).toLocaleString()}
-                            </small>
-                        </div>
-                    ))}
+                    {thread.map((msg) => {
+                        const showTimestamps = (() => {
+                            try {
+                                const v = localStorage.getItem('prefs_showTimestamps');
+                                return v == null ? true : v === '1';
+                            } catch (e) {
+                                return true;
+                            }
+                        })();
+                        return (
+                            <div
+                                key={msg.id}
+                                className={`mb-3 p-3 border rounded ${
+                                    msg.senderId === Number(localStorage.getItem('userId'))
+                                        ? 'bg-primary text-white'
+                                        : 'bg-light'
+                                }`}
+                            >
+                                <div>{msg.content}</div>
+                                {showTimestamps && (
+                                    <small className="text-muted">
+                                        {new Date(msg.createdAt).toLocaleString()}
+                                    </small>
+                                )}
+                            </div>
+                        );
+                    })}
                 </Card.Body>
             </Card>
 

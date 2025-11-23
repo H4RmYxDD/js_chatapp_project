@@ -1,27 +1,24 @@
 // ...existing code...
 import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 import type { Message } from '../types/Message';
 import { apiClient } from '../api/apiClient';
 
-const SIDEBAR_WIDTH = 240;
-
 const MainPage: React.FC = () => {
-    const [open, setOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => setMounted(true), []);
-
-    useEffect(() => {
-        if (!mounted) return;
-        document.body.classList.toggle('sidebar-open', open);
-        return () => document.body.classList.remove('sidebar-open');
-    }, [open, mounted]);
+    const [usersMap, setUsersMap] = useState<Record<string, string>>({});
+    const navigate = useNavigate();
+    const currentUserId = Number(localStorage.getItem('userId')) || null;
+    const [showTimestamps, setShowTimestamps] = useState<boolean>(() => {
+        try {
+            const v = localStorage.getItem('prefs_showTimestamps');
+            return v == null ? true : v === '1';
+        } catch (e) {
+            return true;
+        }
+    });
 
     useEffect(() => {
         let canceled = false;
@@ -38,24 +35,46 @@ const MainPage: React.FC = () => {
             .finally(() => {
                 if (!canceled) setLoading(false);
             });
+        // also fetch users so we can map senderId -> username
+        apiClient
+            .get('/users')
+            .then((res) => {
+                if (canceled) return;
+                const map: Record<string, string> = {};
+                if (Array.isArray(res.data)) {
+                    res.data.forEach((u: any) => {
+                        if (u && typeof u.id !== 'undefined')
+                            map[String(u.id)] = u.username || u.email || '';
+                    });
+                }
+                setUsersMap(map);
+            })
+            .catch(() => {
+                if (!canceled) setUsersMap({});
+            });
         return () => {
             canceled = true;
         };
-    }, [mounted]);
+    }, []);
 
-    const toggle = () => setOpen((v) => !v);
-    const close = () => setOpen(false);
-    const logout = () => {
-        localStorage.removeItem('token');
-        window.location.href = '/';
-    };
+    useEffect(() => {
+        // listen for preference changes (other tabs or preferences page)
+        const handler = () => {
+            try {
+                const v = localStorage.getItem('prefs_showTimestamps');
+                setShowTimestamps(v == null ? true : v === '1');
+            } catch (e) {}
+        };
+        window.addEventListener('storage', handler);
+        return () => window.removeEventListener('storage', handler);
+    }, []);
 
     const buildThreads = (msgs: Message[]) => {
         const children = new Map<string, Message[]>();
         const roots: Message[] = [];
         msgs.forEach((m) => {
-            const pid = m.parentMsgId || '';
-            if (!pid) {
+            const pid = String(m.parentMsgId || '');
+            if (pid === '' || pid === 'null' || pid === 'undefined') {
                 roots.push(m);
             } else {
                 if (!children.has(pid)) children.set(pid, []);
@@ -63,36 +82,44 @@ const MainPage: React.FC = () => {
             }
         });
         roots.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-        children.forEach((arr) => arr.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt)));
+        children.forEach((arr) =>
+            arr.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt)),
+        );
         return { roots, children };
     };
 
     const { roots, children } = buildThreads(messages);
 
-    const floating = (
-        <>
-            <button
-                className={`menu-button ${open ? 'hidden' : ''}`}
-                aria-label="Open sidebar"
-                aria-expanded={open}
-                onClick={toggle}
-            >
-                …
-            </button>
-
-            {open && <div className="overlay" onClick={close} style={{ left: `${SIDEBAR_WIDTH}px` }} />}
-        </>
-    );
-
     const ThreadCard: React.FC<{ msg: Message; level?: number }> = ({ msg, level = 0 }) => {
-        const kids = children.get(msg.parentMsgId) || [];
+        const kids = children.get(String(msg.id)) || [];
+        const senderKey = String(msg.senderId);
+        const sender = usersMap[senderKey] || String(msg.senderId) || 'Unknown';
+        const isSent = currentUserId && Number(msg.senderId) === currentUserId;
         return (
             <div className="thread-card" style={{ marginLeft: level * 14 }}>
                 <div className="thread-meta">
-                    <strong className="thread-sender">{msg.senderId || 'Unknown'}</strong>
-                    <span className="thread-time">{msg.createdAt ? new Date(msg.createdAt).toLocaleString() : ''}</span>
+                    <strong className="thread-sender">{sender}</strong>
+                    {showTimestamps && (
+                        <span className="thread-time">
+                            {msg.createdAt ? new Date(msg.createdAt).toLocaleString() : ''}
+                        </span>
+                    )}
                 </div>
                 <div className="thread-content">{msg.content}</div>
+
+                <div style={{ marginTop: 10, display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <span className="small" style={{ color: 'rgba(0,0,0,0.6)' }}>
+                        {isSent ? 'Sent' : 'Received'}
+                    </span>
+                    <button
+                        className="btn btn-sm"
+                        onClick={() => navigate(`/messages/thread/${msg.id}`)}
+                        aria-label={`Reply to message ${msg.id}`}
+                        style={{ marginLeft: 'auto' }}
+                    >
+                        Reply
+                    </button>
+                </div>
 
                 {kids.length > 0 && (
                     <div className="thread-children">
@@ -105,63 +132,24 @@ const MainPage: React.FC = () => {
         );
     };
 
-    const sidebarEl = (
-        <Sidebar
-            className={`sidebar pro-sidebar ${open ? 'open' : ''}`}
-            aria-hidden={!open}
-            style={{ width: SIDEBAR_WIDTH }}
-        >
-            <div className="sidebar-header">
-                <span>TalkBerry</span>
-                <button className="close-btn" onClick={close} aria-label="Close menu">
-                    ×
-                </button>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Menu>
-                    <MenuItem component={<Link to="/main" onClick={close} />}>Home</MenuItem>
-                    <MenuItem component={<Link to="/users" onClick={close} />}>Users</MenuItem>
-
-                    <SubMenu label="Settings" title="Dropdown" className="sidebar-submenu">
-                        <MenuItem component={<Link to="/a" onClick={close} />}>Profile</MenuItem>
-                        <MenuItem component={<Link to="/b" onClick={close} />}>Privacy</MenuItem>
-                        <MenuItem component={<Link to="/c" onClick={close} />}>Preferences</MenuItem>
-                    </SubMenu>
-                </Menu>
-
-                <div className="logout-area" role="group" aria-label="Logout">
-                    <button className="logout-button" onClick={logout}>
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </Sidebar>
-    );
-
     return (
-        <>
-            {mounted && createPortal(floating, document.body)}
-            {mounted && createPortal(sidebarEl, document.body)}
+        <main className="main-content">
+            <div className="app-container">
+                <h1>News feed</h1>
 
-            <main className="main-content">
-                <div className="app-container">
-                    <h1>News feed</h1>
-
-                    {loading ? (
-                        <div>Loading messages…</div>
-                    ) : roots.length === 0 ? (
-                        <div>No messages yet.</div>
-                    ) : (
-                        <section className="threads-list" aria-live="polite">
-                            {roots.map((r) => (
-                                <ThreadCard key={r.id} msg={r} />
-                            ))}
-                        </section>
-                    )}
-                </div>
-            </main>
-        </>
+                {loading ? (
+                    <div>Loading messages…</div>
+                ) : roots.length === 0 ? (
+                    <div>No messages yet.</div>
+                ) : (
+                    <section className="threads-list" aria-live="polite">
+                        {roots.map((r) => (
+                            <ThreadCard key={r.id} msg={r} />
+                        ))}
+                    </section>
+                )}
+            </div>
+        </main>
     );
 };
 
