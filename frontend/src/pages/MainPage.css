@@ -1,17 +1,6 @@
-/* polished styles for sidebar + floating button */
-
-/* prevent scrolling when menu open */
-body.sidebar-open {
-    overflow: hidden;
-}
-/* make the pro-sidebar inner a column so logout-area pins to bottom */
 .sidebar .pro-sidebar-inner {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 100vh !important;
+    overflow: visible !important;
 }
-
-/* logout area styling (if not already present) */
 .logout-area {
     margin-top: auto;
     padding: 14px;
@@ -36,7 +25,6 @@ body.sidebar-open {
     cursor: pointer;
 }
 
-/* floating three-dot toggle */
 .menu-button {
     position: fixed;
     top: 18px;
@@ -60,16 +48,14 @@ body.sidebar-open {
 .menu-button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(7,22,34,0.22); }
 .menu-button.hidden { opacity: 0; transform: scale(0.94); pointer-events: none; visibility: hidden; }
 
-/* overlay: lighter and starts after sidebar so sidebar isn't dimmed */
 .overlay {
     position: fixed;
     inset: 0;
-    left: 240px; /* keep sidebar clear */
+    left: 240px; 
     background: rgba(0,0,0,0.45);
     z-index: 1300;
 }
 
-/* submenu visual tweaks */
 .sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
     color: #d6e8f6 !important;
     font-weight: 600;
@@ -97,10 +83,9 @@ body.sidebar-open {
     color: #fff !important;
 }
 
-/* ensure sidebar width matches SIDEBAR_WIDTH in TSX */
 .sidebar.pro-sidebar,
 .sidebar.pro-sidebar > .pro-sidebar-inner {
-    width: 240px !important; /* must match SIDEBAR_WIDTH */
+    width: 240px !important; 
     position: fixed !important;
     left: 0 !important;
     top: 0 !important;
@@ -115,13 +100,11 @@ body.sidebar-open {
     box-shadow: 8px 0 28px rgba(8,15,25,0.14) !important;
 }
 
-/* open state */
 .sidebar.pro-sidebar.open,
 .sidebar.pro-sidebar.open > .pro-sidebar-inner {
     transform: translateX(0) !important;
 }
 
-/* inner container appearance */
 .sidebar .pro-sidebar-inner {
     height: 100% !important;
     width: 100% !important;
@@ -132,7 +115,6 @@ body.sidebar-open {
     border-right: 1px solid rgba(255,255,255,0.02);
 }
 
-/* header with close button */
 .sidebar-header {
     display: flex;
     align-items: center;
@@ -155,7 +137,6 @@ body.sidebar-open {
 }
 .close-btn:hover { background: rgba(255,255,255,0.03); color: #fff; }
 
-/* menu styling */
 .sidebar .pro-menu { background: transparent !important; margin:0 !important; padding:0 !important; }
 .sidebar .pro-menu .pro-menu-item { padding: 12px 10px !important; border-radius: 8px !important; }
 .sidebar .pro-menu .pro-menu-item > .pro-inner-item { color: #d6e8f6 !important; font-size:15px !important; }
@@ -165,32 +146,25 @@ body.sidebar-open {
     color: #fff !important;
 }
 
-/* details fallback */
 .sidebar-details summary { list-style:none; cursor:pointer; padding:10px 12px; border-radius:8px; color:#d6e8f6; display:block; }
 .sidebar-details summary::-webkit-details-marker { display:none; }
 .sidebar-details[open] summary { background: rgba(255,255,255,0.03); color:#fff; }
 .details-list { margin-top:8px; margin-left:6px; display:flex; flex-direction:column; gap:6px; }
 
-/* logout pinned to bottom */
 .sidebar .pro-menu + .pro-menu,
 .sidebar .logout-area { margin-top: auto; padding-top:12px; }
 .logout-button { width:100%; background:#fff; color:#0f2b44; border:none; padding:10px 12px; border-radius:8px; font-weight:600; cursor:pointer; }
 .logout-button:hover { background:#f1f5f9; transform:translateY(-1px); }
 
-/* main content: keep centered and readable */
 .main-content { min-height:100vh; transition: margin-left 260ms cubic-bezier(.2,.9,.2,1); display:flex; align-items:center; justify-content:center; padding:40px; }
 
-/* responsive tweaks */
 @media (max-width:480px) {
     .menu-button { top:12px; left:12px; width:44px; height:44px; font-size:18px; }
     .sidebar.pro-sidebar, .sidebar .pro-sidebar-inner { width:78% !important; }
 }
 
-/* accessibility */
 .sidebar .pro-menu .pro-inner-item:focus, .menu-button:focus, .logout-button:focus, .close-btn:focus { outline:3px solid rgba(25,150,200,0.16); outline-offset:2px; }
-/* ...existing code... */
 
-/* improved logout area: pinned, contrasted, and easier to see */
 .logout-area {
     margin-top: auto;
     padding: 14px;
@@ -198,14 +172,12 @@ body.sidebar-open {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    /* subtle pane so the button stands out on any inner background */
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border-radius: 10px;
     box-shadow: 0 6px 14px rgba(3,10,18,0.06);
-    margin-bottom: 18px; /* breathing room from bottom edge */
+    margin-bottom: 18px;
 }
 
-/* make logout a clear call-to-action */
 .logout-button {
     width: 100%;
     max-width: 200px;
@@ -223,3 +195,48 @@ body.sidebar-open {
 .logout-button:focus { outline: 3px solid rgba(255,107,107,0.18); outline-offset: 3px; }
 
 /* ...existing code... */
+
+/* threads list + cards */
+.threads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 920px;
+    margin: 18px auto 60px;
+}
+
+.thread-card {
+    background: rgba(255,255,255,0.02);
+    padding: 12px 14px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(7,12,18,0.04);
+    border-left: 3px solid rgba(255,255,255,0.02);
+}
+
+.thread-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #cfe5ff;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.thread-time {
+    margin-left: auto;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+}
+
+.thread-content {
+    color: #e6f0ff;
+    line-height: 1.45;
+    white-space: pre-wrap;
+}
+
+.thread-children {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

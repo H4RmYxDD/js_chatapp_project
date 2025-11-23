@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import RegisterPage from './pages/RegisterPage.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import MainPage from './pages/MainPage.tsx';
+import UsersPage from './pages/UsersPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path='/users' element={<UsersPage />} />
             </Routes>
         </BrowserRouter>
         <ToastContainer theme="colored" />

@@ -6,6 +6,11 @@ import auth from '../util/auth.js';
 
 const router = express.Router();
 
+router.get('/users',auth, async (req, res,) => {
+    const users = await User.getAllUsers();
+    res.json(users);
+});
+
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
