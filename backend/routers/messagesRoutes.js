@@ -1,26 +1,27 @@
 import express from 'express';
-import * as User from '../data/users.js';
-import jws from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import auth from '../util/auth.js';
+import * as Message from '../data/messages.js';
 
 const router = express.Router();
 
 router.post('/messages', auth, async (req, res) => {
-    const { receiverId, content, parentMsgId } = req.body;
+    const { recipientId, content, parentId } = req.body;
 
-    if (!receiverId || !content) {
-        return res.status(400).json({ message: 'Receiver ID and content are required.' });
+    if (!recipientId || !content) {
+        return res.status(400).json({ message: 'recipientId és content kötelező' });
     }
 
     const newMessage = await Message.createMessage({
         senderId: req.user.id,
-        receiverId,
+        recipientId,
         content,
-        parentMsgId,
+        parentId: parentId || null,
     });
 
-    res.status(201).json({ message: 'Message sent successfully.', messageId: newMessage.id });
+    res.status(201).json({
+        message: 'Message sent successfully',
+        messageId: newMessage.id
+    });
 });
 
 router.get('/messages', auth, async (req, res) => {
@@ -28,18 +29,23 @@ router.get('/messages', auth, async (req, res) => {
     res.json(messages);
 });
 
-router.get('/messages/conversation:userId', auth, async (req, res) => {
+router.get('/messages/conversation/:userId', auth, async (req, res) => {
     const { userId } = req.params;
+
     const conversation = await Message.getConversation(req.user.id, userId);
     res.json(conversation);
 });
 
-router.get('/messsages/thread/:id', auth, async (req, res) => {
+router.get('/messages/thread/:id', auth, async (req, res) => {
     const { id } = req.params;
+
     const thread = await Message.getMessageThread(id);
-    if (!thread) {
-        return res.status(404).json({ message: 'Message thread not found.' });
+
+    if (!thread || thread.length === 0) {
+        return res.status(404).json({ message: 'Message thread not found' });
     }
+
     res.json(thread);
 });
+
 export default router;

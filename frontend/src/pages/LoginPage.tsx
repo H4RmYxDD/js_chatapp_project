@@ -17,6 +17,7 @@ function LoginPage() {
             .post('/users/login', user)
             .then((res) => {
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem("userId", res.data.user.id);
                 toast.success('Login successful');
                 nav('/main');
             })

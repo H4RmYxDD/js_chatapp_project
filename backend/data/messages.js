@@ -70,3 +70,29 @@ export const getRecentMessagesForUser = (userId, limit = 10) => {
         LIMIT ?
     `).all(userId, userId, limit);
 };
+
+export const getMessagesByUserId = (userId) => {
+    return db.prepare(`
+        SELECT * FROM messages
+        WHERE senderId = ? OR receiverId = ?
+        ORDER BY createdAt DESC
+    `).all(userId, userId);
+};
+
+export const getConversation = (userId1, userId2) => {
+    return db.prepare(`
+        SELECT * FROM messages
+        WHERE (senderId = ? AND receiverId = ?)
+           OR (senderId = ? AND receiverId = ?)
+        ORDER BY createdAt ASC
+    `).all(userId1, userId2, userId2, userId1);
+};
+
+export const getMessageThread = (id) => {
+    return db.prepare(`
+        SELECT * FROM messages
+        WHERE id = ?
+           OR parentMsgId = ?
+        ORDER BY createdAt ASC
+    `).all(id, id);
+};
