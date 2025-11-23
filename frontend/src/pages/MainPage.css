@@ -1,134 +1,225 @@
+/* polished styles for sidebar + floating button */
+
+/* prevent scrolling when menu open */
+body.sidebar-open {
+    overflow: hidden;
+}
+/* make the pro-sidebar inner a column so logout-area pins to bottom */
+.sidebar .pro-sidebar-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+/* logout area styling (if not already present) */
+.logout-area {
+    margin-top: auto;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(3,10,18,0.06);
+    margin-bottom: 18px;
+}
+.logout-button {
+    width: 100%;
+    max-width: 200px;
+    background: linear-gradient(180deg,#ff6b6b 0%,#e85a5a 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* floating three-dot toggle */
 .menu-button {
     position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 1200;
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
+    top: 18px;
+    left: 18px;
+    z-index: 1400;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
     border: none;
-    background: #13395e;
+    background: linear-gradient(180deg,#154264 0%,#0f324a 100%);
     color: #fff;
     font-size: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(7,22,34,0.18);
+    transition: transform 160ms ease, opacity 160ms ease, box-shadow 160ms ease;
 }
+.menu-button:focus { outline: 3px solid rgba(25,150,200,0.18); outline-offset: 2px; }
+.menu-button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(7,22,34,0.22); }
+.menu-button.hidden { opacity: 0; transform: scale(0.94); pointer-events: none; visibility: hidden; }
 
+/* overlay: lighter and starts after sidebar so sidebar isn't dimmed */
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 1100;
+    left: 240px; /* keep sidebar clear */
+    background: rgba(0,0,0,0.45);
+    z-index: 1300;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100vh;
-    background: #13395e;
-    color: #b6c8d9;
-    transform: translateX(-100%);
-    transition: transform 220ms ease;
-    z-index: 1150;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.12);
+/* submenu visual tweaks */
+.sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
+    color: #d6e8f6 !important;
+    font-weight: 600;
+    padding: 10px 12px !important;
+    border-radius: 8px;
 }
 
-.sidebar.open {
-    transform: translateX(0);
-}
-
-.sidebar-header {
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 12px;
-    font-size: 14px;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.sidebar-nav a {
-    color: #d6e5f1;
-    text-decoration: none;
-    padding: 8px 10px;
-    border-radius: 6px;
-    display: inline-block;
-}
-
-.sidebar-nav a:hover {
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-}
-
-.sidebar-details summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 8px 10px;
-    border-radius: 6px;
-    color: #d6e5f1;
-}
-
-.sidebar-details summary::-webkit-details-marker {
-    display: none;
-}
-
-.sidebar-details[open] summary {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
-}
-
-.details-list {
+.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
+    margin-left: 6px;
+    padding-left: 6px;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-top: 8px;
-    margin-left: 6px;
 }
 
-.logout-button {
-    margin-top: 575px;
-    background: #f5f5f5;
-    color: #333;
+.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
+    color: #bcd4ff !important;
+    padding-left: 8px !important;
+    font-size: 14px !important;
+}
+
+.sidebar .pro-menu .pro-sub-menu.open > .pro-inner-item,
+.sidebar .pro-menu .pro-sub-menu > .pro-inner-item:hover {
+    background: rgba(255,255,255,0.03) !important;
+    color: #fff !important;
+}
+
+/* ensure sidebar width matches SIDEBAR_WIDTH in TSX */
+.sidebar.pro-sidebar,
+.sidebar.pro-sidebar > .pro-sidebar-inner {
+    width: 240px !important; /* must match SIDEBAR_WIDTH */
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100vh !important;
+    transform: translateX(-105%) !important;
+    transition: transform 260ms cubic-bezier(.2,.9,.2,1) !important;
+    z-index: 1350 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    box-shadow: 8px 0 28px rgba(8,15,25,0.14) !important;
+}
+
+/* open state */
+.sidebar.pro-sidebar.open,
+.sidebar.pro-sidebar.open > .pro-sidebar-inner {
+    transform: translateX(0) !important;
+}
+
+/* inner container appearance */
+.sidebar .pro-sidebar-inner {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 22px !important;
+    background: linear-gradient(180deg,#13395e 0%,#0f2b44 100%) !important;
+    color: #d6e8f6 !important;
+    box-sizing: border-box !important;
+    border-right: 1px solid rgba(255,255,255,0.02);
+}
+
+/* header with close button */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+}
+.close-btn {
+    background: transparent;
     border: none;
-    padding: 8px 10px;
-    border-radius: 6px;
+    color: #d6e8f6;
+    font-size: 20px;
+    line-height: 1;
     cursor: pointer;
-    align-self: stretch;
+    padding: 4px 6px;
+    border-radius: 6px;
+}
+.close-btn:hover { background: rgba(255,255,255,0.03); color: #fff; }
+
+/* menu styling */
+.sidebar .pro-menu { background: transparent !important; margin:0 !important; padding:0 !important; }
+.sidebar .pro-menu .pro-menu-item { padding: 12px 10px !important; border-radius: 8px !important; }
+.sidebar .pro-menu .pro-menu-item > .pro-inner-item { color: #d6e8f6 !important; font-size:15px !important; }
+.sidebar .pro-menu .pro-menu-item:hover > .pro-inner-item,
+.sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
+    background: rgba(255,255,255,0.04) !important;
+    color: #fff !important;
 }
 
-.logout-button:hover {
-    background: #ececec;
+/* details fallback */
+.sidebar-details summary { list-style:none; cursor:pointer; padding:10px 12px; border-radius:8px; color:#d6e8f6; display:block; }
+.sidebar-details summary::-webkit-details-marker { display:none; }
+.sidebar-details[open] summary { background: rgba(255,255,255,0.03); color:#fff; }
+.details-list { margin-top:8px; margin-left:6px; display:flex; flex-direction:column; gap:6px; }
+
+/* logout pinned to bottom */
+.sidebar .pro-menu + .pro-menu,
+.sidebar .logout-area { margin-top: auto; padding-top:12px; }
+.logout-button { width:100%; background:#fff; color:#0f2b44; border:none; padding:10px 12px; border-radius:8px; font-weight:600; cursor:pointer; }
+.logout-button:hover { background:#f1f5f9; transform:translateY(-1px); }
+
+/* main content: keep centered and readable */
+.main-content { min-height:100vh; transition: margin-left 260ms cubic-bezier(.2,.9,.2,1); display:flex; align-items:center; justify-content:center; padding:40px; }
+
+/* responsive tweaks */
+@media (max-width:480px) {
+    .menu-button { top:12px; left:12px; width:44px; height:44px; font-size:18px; }
+    .sidebar.pro-sidebar, .sidebar .pro-sidebar-inner { width:78% !important; }
 }
 
-.main-content {
-    min-height: 100vh;
-    transition: margin-left 220ms ease;
+/* accessibility */
+.sidebar .pro-menu .pro-inner-item:focus, .menu-button:focus, .logout-button:focus, .close-btn:focus { outline:3px solid rgba(25,150,200,0.16); outline-offset:2px; }
+/* ...existing code... */
+
+/* improved logout area: pinned, contrasted, and easier to see */
+.logout-area {
+    margin-top: auto;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    /* subtle pane so the button stands out on any inner background */
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(3,10,18,0.06);
+    margin-bottom: 18px; /* breathing room from bottom edge */
 }
 
-@media (min-width: 992px) {
-    .menu-button {
-        display: inline-flex;
-    }
-
-    .overlay {
-        display: none;
-    }
-
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    .sidebar.open {
-        transform: translateX(0);
-    }
+/* make logout a clear call-to-action */
+.logout-button {
+    width: 100%;
+    max-width: 200px;
+    background: linear-gradient(180deg,#ff6b6b 0%,#e85a5a 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(232,90,90,0.18);
+    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
 }
+.logout-button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(232,90,90,0.22); }
+.logout-button:focus { outline: 3px solid rgba(255,107,107,0.18); outline-offset: 3px; }
+
+/* ...existing code... */

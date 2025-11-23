@@ -1,68 +1,78 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import './MainPage.css';
-import CloseButton from 'react-bootstrap/CloseButton';
 
-const MainPage = () => {
+const SIDEBAR_WIDTH = 240;
+
+const MainPage: React.FC = () => {
     const [open, setOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
+    useEffect(() => {
+        if (!mounted) return;
+        document.body.classList.toggle('sidebar-open', open);
+        return () => document.body.classList.remove('sidebar-open');
+    }, [open, mounted]);
+
+    const toggle = () => setOpen((v) => !v);
+    const close = () => setOpen(false);
     const logout = () => {
         localStorage.removeItem('token');
         window.location.href = '/';
     };
 
-    const close = () => setOpen(false);
-
-    return (
+    const floating = (
         <>
             <button
-                className="menu-button"
+                className={`menu-button ${open ? 'hidden' : ''}`}
                 aria-label="Open sidebar"
                 aria-expanded={open}
-                onClick={() => setOpen((v) => !v)}
+                onClick={toggle}
             >
                 …
             </button>
-            {open && <div className="overlay" onClick={close} />}
 
-            <aside className={`sidebar ${open ? 'open' : ''}`} aria-hidden={!open}>
-                <div className="sidebar-header">React-Bootstrap</div>
+            {open && <div className="overlay" onClick={close} style={{ left: `${SIDEBAR_WIDTH}px` }} />}
+        </>
+    );
 
-                <nav className="sidebar-nav">
-                    <Link to="#home" onClick={close}>
-                        Home
-                    </Link>
-                    <Link to="#link" onClick={close}>
-                        Link
-                    </Link>
+    const sidebarEl = (
+        <Sidebar className={`sidebar pro-sidebar ${open ? 'open' : ''}`} aria-hidden={!open} style={{ width: SIDEBAR_WIDTH }}>
+            <div className="sidebar-header">
+                <span>React-Pro-Sidebar</span>
+                <button className="close-btn" onClick={close} aria-label="Close menu">×</button>
+            </div>
 
-                    <details className="sidebar-details">
-                        <summary>Dropdown</summary>
-                        <div className="details-list">
-                            <Link to="#action/3.1" onClick={close}>
-                                Action
-                            </Link>
-                            <Link to="#action/3.2" onClick={close}>
-                                Another action
-                            </Link>
-                            <Link to="#action/3.3" onClick={close}>
-                                Something
-                            </Link>
-                            <hr />
-                            <Link to="#action/3.4" onClick={close}>
-                                Separated link
-                            </Link>
-                            <CloseButton />
-                        </div>
-                    </details>
-                </nav>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <Menu>
+                    <MenuItem component={<Link to="/" onClick={close} />}>Home</MenuItem>
+                    <MenuItem component={<Link to="/link" onClick={close} />}>Link</MenuItem>
 
-                <button className="logout-button" onClick={logout}>
-                    Logout
-                </button>
-            </aside>
+                    <SubMenu label="Dropdown" title="Dropdown" className="sidebar-submenu">
+                        <MenuItem component={<Link to="/a" onClick={close} />}>Action</MenuItem>
+                        <MenuItem component={<Link to="/b" onClick={close} />}>Another action</MenuItem>
+                        <MenuItem component={<Link to="/c" onClick={close} />}>Something</MenuItem>
+                    </SubMenu>
+                </Menu>
+
+                <div className="logout-area" role="group" aria-label="Logout">
+                    <button className="logout-button" onClick={logout}>Logout</button>
+                </div>
+            </div>
+        </Sidebar>
+    );
+
+    return (
+        <>
+            {mounted && createPortal(floating, document.body)}
+            {mounted && createPortal(sidebarEl, document.body)}
 
             <main className="main-content">
-                <div style={{ padding: 24, marginLeft: 0 }}>
+                <div style={{ padding: 24 }}>
                     <h1>nyald meg a herem</h1>
                 </div>
             </main>
