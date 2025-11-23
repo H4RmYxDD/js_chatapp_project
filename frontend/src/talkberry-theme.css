@@ -1,0 +1,44 @@
+/* Login page wrapper */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Talk Berry Custom Theme */
+:root {
+    --berry-primary: #8B5FBF;
+    --berry-secondary: #FF6B9D;
+    --berry-light: #F8F7FF;
+    --berry-dark: #2D3047;
+    --berry-success: #4ECDC4;
+    --berry-warning: #FFE66D;
+
+    --bs-primary: var(--berry-primary);
+    --bs-secondary: var(--berry-secondary);
+}
+
+.berry-gradient {
+    background: linear-gradient(135deg, var(--berry-primary), var(--berry-secondary));
+}
+
+.berry-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(139, 95, 191, 0.1);
+}
+
+.btn-berry-primary {
+    background: linear-gradient(135deg, var(--berry-primary), var(--berry-secondary));
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-berry-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(139, 95, 191, 0.4);
+}
