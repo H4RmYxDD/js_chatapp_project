@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { apiClient } from '../api/apiClient';
-import { Button, Container, Row, Col, Form, Card } from 'react-bootstrap';
+import { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { apiClient } from "../api/apiClient";
+import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 
 interface Message {
     id: number;
@@ -16,9 +16,9 @@ const ConversationPage: React.FC = () => {
     const navigate = useNavigate();
 
     const [messages, setMessages] = useState<Message[]>([]);
-    const [messageText, setMessageText] = useState('');
+    const [messageText, setMessageText] = useState("");
 
-    const currentUserId = Number(localStorage.getItem('userId'));
+    const currentUserId = Number(localStorage.getItem("userId"));
     const chatEndRef = useRef<HTMLDivElement | null>(null);
 
     const fetchConversation = () => {
@@ -27,7 +27,7 @@ const ConversationPage: React.FC = () => {
             .then((res) => setMessages(res.data))
             .catch((err) => {
                 console.error(err);
-                navigate('/users');
+                navigate("/users");
             });
     };
 
@@ -35,13 +35,13 @@ const ConversationPage: React.FC = () => {
         if (!messageText.trim()) return;
 
         apiClient
-            .post('/messages', {
+            .post("/messages", {
                 recipientId: Number(userId),
                 content: messageText,
-                parentId: null,
+                parentId: null
             })
             .then(() => {
-                setMessageText('');
+                setMessageText("");
                 fetchConversation(); // frissítés
             })
             .catch((err) => console.error(err));
@@ -55,7 +55,7 @@ const ConversationPage: React.FC = () => {
 
     useEffect(() => {
         if (chatEndRef.current) {
-            chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+            chatEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [messages]);
 
@@ -64,54 +64,35 @@ const ConversationPage: React.FC = () => {
             <h3>Conversation</h3>
             <hr />
 
-            <Card style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+            <Card style={{ maxHeight: "70vh", overflowY: "auto" }}>
                 <Card.Body>
-                    // Replace the message display with:
                     {messages.map((msg) => (
                         <Row
                             key={msg.id}
-                            className={`mb-3 ${
+                            className={`mb-3 d-flex ${
                                 msg.senderId === currentUserId
-                                    ? 'justify-content-end'
-                                    : 'justify-content-start'
+                                    ? "justify-content-end"
+                                    : "justify-content-start"
                             }`}
                         >
-                            <Col xs="auto" style={{ maxWidth: '70%' }}>
+                            <Col xs="auto">
                                 <div
-                                    className={`p-3 rounded-3 ${
+                                    className={`p-2 rounded ${
                                         msg.senderId === currentUserId
-                                            ? 'berry-chat-bubble-sent'
-                                            : 'berry-chat-bubble-received'
+                                            ? "bg-primary text-white"
+                                            : "bg-light"
                                     }`}
+                                    style={{ maxWidth: "300px" }}
                                 >
-                                    <div className="mb-1">{msg.content}</div>
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <small
-                                            className={
-                                                msg.senderId === currentUserId
-                                                    ? 'text-white-50'
-                                                    : 'text-muted'
-                                            }
-                                        >
-                                            {formatTime(msg.createdAt)}
-                                        </small>
-                                        <Button
-                                            variant={
-                                                msg.senderId === currentUserId
-                                                    ? 'outline-light'
-                                                    : 'outline-primary'
-                                            }
-                                            size="sm"
-                                            onClick={() => navigate(`/messages/thread/${msg.id}`)}
-                                            className="ms-2 border-0"
-                                        >
-                                            💬
-                                        </Button>
+                                    {msg.content}
+                                    <div className="text-muted" style={{ fontSize: "0.8rem" }}>
+                                        {new Date(msg.createdAt).toLocaleString()}
                                     </div>
                                 </div>
                             </Col>
                         </Row>
                     ))}
+
                     <div ref={chatEndRef}></div>
                 </Card.Body>
             </Card>
@@ -124,11 +105,15 @@ const ConversationPage: React.FC = () => {
                         placeholder="Type a message..."
                         value={messageText}
                         onChange={(e) => setMessageText(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                        onKeyDown={(e) => e.key === "Enter" && handleSend()}
                     />
                 </Col>
                 <Col xs={2}>
-                    <Button variant="primary" className="w-100" onClick={handleSend}>
+                    <Button
+                        variant="primary"
+                        className="w-100"
+                        onClick={handleSend}
+                    >
                         Send
                     </Button>
                 </Col>
