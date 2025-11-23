@@ -4,7 +4,7 @@ import * as Message from '../data/messages.js';
 
 const router = express.Router();
 
-router.post('/messages', auth, async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const { recipientId, content, parentId } = req.body;
 
     if (!recipientId || !content) {
@@ -15,28 +15,28 @@ router.post('/messages', auth, async (req, res) => {
         senderId: req.user.id,
         recipientId,
         content,
-        parentId: parentId || null,
+        parentMsgId: parentId || null,
     });
 
     res.status(201).json({
         message: 'Message sent successfully',
-        messageId: newMessage.id
+        messageId: newMessage.id,
     });
 });
 
-router.get('/messages', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
     const messages = await Message.getMessagesByUserId(req.user.id);
     res.json(messages);
 });
 
-router.get('/messages/conversation/:userId', auth, async (req, res) => {
+router.get('/conversation/:userId', auth, async (req, res) => {
     const { userId } = req.params;
 
     const conversation = await Message.getConversation(req.user.id, userId);
     res.json(conversation);
 });
 
-router.get('/messages/thread/:id', auth, async (req, res) => {
+router.get('/thread/:id', auth, async (req, res) => {
     const { id } = req.params;
 
     const thread = await Message.getMessageThread(id);

@@ -22,11 +22,11 @@ export const getMessageById = (id) => {
     return db.prepare('SELECT * FROM messages WHERE id = ?').get(id);
 };
 
-export const createMessage = ({ senderId, receiverId, content, parentMsgId = null }) => {
+export const createMessage = ({ senderId, recipientId, content, parentMsgId = null }) => {
     const result = db.prepare(`
         INSERT INTO messages (senderId, receiverId, content, parentMsgId)
         VALUES (?, ?, ?, ?)
-    `).run(senderId, receiverId, content, parentMsgId);
+    `).run(senderId, recipientId, content, parentMsgId);
     return getMessageById(result.lastInsertRowid);
 };
 

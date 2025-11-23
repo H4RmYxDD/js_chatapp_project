@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import MainPage from './pages/MainPage.tsx';
 import UsersPage from './pages/UsersPage.tsx';
 import ConversationPage from './pages/ConversationPage.tsx';
+import ThreadPage from './pages/ThreadPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/main" element={<MainPage />} />
                 <Route path="/users" element={<UsersPage />} />
                 <Route path="/messages/conversation/:userId" element={<ConversationPage />} />
+                <Route path="/messages/thread/:id" element={<ThreadPage />} />
             </Routes>
         </BrowserRouter>
         <ToastContainer theme="colored" />
