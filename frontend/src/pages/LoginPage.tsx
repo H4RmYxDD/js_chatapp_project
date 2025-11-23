@@ -1,74 +1,48 @@
-// ...existing code...
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { apiClient } from '../api/apiClient';
-import type { User } from '../types/User';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { apiClient } from '../api/apiClient';
 
-function LoginPage() {
-    const [user, setUser] = useState<User>({
-        username: '',
-        password: '',
+const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await apiClient.post('/users/login', {
+      username: (e.target as any).username.value,
+      password: (e.target as any).password.value,
     });
-    const nav = useNavigate();
-    const tryLogin = async () => {
-        apiClient
-            .post('/users/login', user)
-            .then((res) => {
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem("userId", res.data.user.id);
-                toast.success('Login successful');
-                nav('/main');
-            })
-            .catch((error) => {
-                toast.error('Login failed: ' + error.response?.data?.message || error.message);
-            });
-    };
-    const login = () => {
-        if (!user.username || !user.password) {
-            toast.error('Please fill in all fields');
-            return;
-        }
-        tryLogin();
-    };
+    localStorage.setItem('token', res.data.token);
+    navigate('/main');
+  };
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        login();
-    };
+  return (
+    <div className="login-wrapper center">
+      <div className="login-card card">
+        <aside className="login-left center">
+          <div>
+            <img src="/src/assets/logo.png" alt="TalkBerry" style={{width:120,marginBottom:16}}/>
+            <h2 style={{margin:0}}>Sweet conversations</h2>
+            <p className="small" style={{marginTop:8}}>Fast, simple threaded messaging</p>
+          </div>
+        </aside>
 
-    return (
-        <>
-            <form className="login-container" onSubmit={onSubmit}>
-                <label htmlFor="usernameField">Username</label>
-                <input
-                    type="text"
-                    id="usernameField"
-                    onChange={(e) => setUser({ ...user, username: e.target.value })}
-                    placeholder="Your username"
-                    value={user.username}
-                />
-                <label htmlFor="passwordField">Password</label>
-                <input
-                    type="password"
-                    id="passwordField"
-                    onChange={(e) => setUser({ ...user, password: e.target.value })}
-                    placeholder="Your password"
-                    value={user.password}
-                />
-                <button type="submit" id="loginButton">
-                    Login
-                </button>
-            </form>
-
-            <div>
-                <p>
-                    You dont have an account yet? <Link to="/register">Register here</Link>
-                </p>
-            </div>
-        </>
-    );
-}
+        <section className="login-right">
+          <h3 style={{marginTop:0}}>Welcome back</h3>
+          <form onSubmit={submit} className="login-form" autoComplete="off">
+            <label>Username</label>
+            <input name="username" className="form-input" required />
+            <label style={{marginTop:12}}>Password</label>
+            <input name="password" type="password" className="form-input" required />
+            <div style={{height:8}} />
+            <button type="submit" className="btn btn-primary">Sign in</button>
+            <div style={{height:8}} />
+            <div className="small">Don't have an account? <a href="/register">Register</a></div>
+          </form>
+        </section>
+      </div>
+    </div>
+  );
+};
 
 export default LoginPage;

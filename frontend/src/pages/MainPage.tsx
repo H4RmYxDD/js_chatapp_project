@@ -50,7 +50,6 @@ const MainPage: React.FC = () => {
         window.location.href = '/';
     };
 
-    // build parent->children map and root threads
     const buildThreads = (msgs: Message[]) => {
         const children = new Map<string, Message[]>();
         const roots: Message[] = [];
@@ -63,10 +62,8 @@ const MainPage: React.FC = () => {
                 children.get(pid)!.push(m);
             }
         });
-        // optional: sort roots by createdAt desc
         roots.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-        // sort children arrays by createdAt asc (replies in order)
-        children.forEach((arr, _) => arr.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt)));
+        children.forEach((arr) => arr.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt)));
         return { roots, children };
     };
 
@@ -124,9 +121,7 @@ const MainPage: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <Menu>
                     <MenuItem component={<Link to="/main" onClick={close} />}>Home</MenuItem>
-                    <MenuItem component={<Link to="/users" onClick={close} />}>
-                        Users
-                    </MenuItem>
+                    <MenuItem component={<Link to="/users" onClick={close} />}>Users</MenuItem>
 
                     <SubMenu label="Settings" title="Dropdown" className="sidebar-submenu">
                         <MenuItem component={<Link to="/a" onClick={close} />}>Profile</MenuItem>
@@ -150,7 +145,7 @@ const MainPage: React.FC = () => {
             {mounted && createPortal(sidebarEl, document.body)}
 
             <main className="main-content">
-                <div style={{ padding: 24, width: '100%' }}>
+                <div className="app-container">
                     <h1>News feed</h1>
 
                     {loading ? (
@@ -171,3 +166,4 @@ const MainPage: React.FC = () => {
 };
 
 export default MainPage;
+// ...existing code...

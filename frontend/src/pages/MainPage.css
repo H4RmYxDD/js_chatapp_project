@@ -146,6 +146,41 @@
     color: #fff !important;
 }
 
+/* ...existing code... */
+
+.main-content {
+    min-height: 100vh;
+    transition: margin-left 260ms cubic-bezier(.2,.9,.2,1);
+    display: flex;
+    align-items: flex-start;     /* keep content at top */
+    justify-content: flex-start; /* left align inside page */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* when sidebar is open: shift the page content to the right */
+body.sidebar-open .main-content {
+    margin-left: 240px;
+}
+
+/* constrain inner container so feed doesn't stretch full width */
+.app-container {
+    max-width: 920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0; /* we use .main-content padding */
+}
+
+/* optional: reduce huge logo size if present inside feed */
+.app-container img {
+    max-width: 320px;
+    height: auto;
+    display: block;
+    margin: 0 0 18px 0;
+}
+
+/* ...existing code... */
+
 .sidebar-details summary { list-style:none; cursor:pointer; padding:10px 12px; border-radius:8px; color:#d6e8f6; display:block; }
 .sidebar-details summary::-webkit-details-marker { display:none; }
 .sidebar-details[open] summary { background: rgba(255,255,255,0.03); color:#fff; }
@@ -156,8 +191,14 @@
 .logout-button { width:100%; background:#fff; color:#0f2b44; border:none; padding:10px 12px; border-radius:8px; font-weight:600; cursor:pointer; }
 .logout-button:hover { background:#f1f5f9; transform:translateY(-1px); }
 
-.main-content { min-height:100vh; transition: margin-left 260ms cubic-bezier(.2,.9,.2,1); display:flex; align-items:center; justify-content:center; padding:40px; }
-
+.main-content {
+    min-height:100vh;
+    transition: margin-left 260ms cubic-bezier(.2,.9,.2,1);
+    display:flex;
+    align-items:flex-start;   /* changed from center */
+    justify-content:flex-start;/* changed from center */
+    padding:40px;
+}
 @media (max-width:480px) {
     .menu-button { top:12px; left:12px; width:44px; height:44px; font-size:18px; }
     .sidebar.pro-sidebar, .sidebar .pro-sidebar-inner { width:78% !important; }
@@ -193,8 +234,6 @@
 }
 .logout-button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(232,90,90,0.22); }
 .logout-button:focus { outline: 3px solid rgba(255,107,107,0.18); outline-offset: 3px; }
-
-/* ...existing code... */
 
 /* threads list + cards */
 .threads-list {
