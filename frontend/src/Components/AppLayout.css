@@ -100,7 +100,6 @@
     white-space: pre-wrap;
 }
 
-/* small composer */
 .message-composer {
     display: flex;
     gap: 8px;
@@ -116,7 +115,6 @@
     color: var(--text);
 }
 
-/* responsive */
 @media (max-width: 900px) {
     .app-grid {
         grid-template-columns: 1fr;
@@ -129,42 +127,42 @@
     }
 }
 
-.sidebar .pro-sidebar-inner,
-.sidebar.pro-sidebar,
-.sidebar .pro-menu,
-.sidebar .pro-menu .pro-sub-menu,
-.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list,
-.sidebar .pro-menu .pro-sub-menu .pro-menu-item {
+.dark-mode .sidebar .pro-sidebar-inner,
+.dark-mode .sidebar.pro-sidebar,
+.dark-mode .sidebar .pro-menu,
+.dark-mode .sidebar .pro-menu .pro-sub-menu,
+.dark-mode .sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list,
+.dark-mode .sidebar .pro-menu .pro-sub-menu .pro-menu-item {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
 }
 
-.sidebar .pro-sidebar-inner {
+.dark-mode .sidebar .pro-sidebar-inner {
     background: linear-gradient(180deg, #13395e 0%, #0f2b44 100%) !important;
     background-color: rgba(15, 35, 60, 0.98) !important;
     overflow-y: auto !important;
 }
 
-.sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
+.dark-mode .sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
     background: var(--panel-bg) !important;
     background-color: var(--panel-bg) !important;
     color: var(--text-dark) !important;
 }
 
-.sidebar .pro-menu .pro-menu-item > .pro-inner-item,
-.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item,
-.sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
+.dark-mode .sidebar .pro-menu .pro-menu-item > .pro-inner-item,
+.dark-mode .sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item,
+.dark-mode .sidebar .pro-menu .pro-sub-menu > .pro-inner-item {
     color: var(--text-dark) !important;
 }
 
-.sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
+.dark-mode .sidebar .pro-menu .pro-menu-item.pro-menu-item-active > .pro-inner-item {
     background: rgba(255, 255, 255, 0.04) !important;
     color: var(--text) !important;
 }
 
-.pro-sub-menu-list,
-.pro-sub-menu {
+.dark-mode .pro-sub-menu-list,
+.dark-mode .pro-sub-menu {
     background: transparent !important;
 }
 
@@ -182,11 +180,11 @@
     background: rgba(255, 255, 255, 0.06);
 }
 
-.sidebar .pro-menu,
-.sidebar .pro-menu ul,
-.sidebar .pro-menu li,
-.sidebar .pro-menu div,
-.sidebar .pro-menu a {
+.dark-mode .sidebar .pro-menu,
+.dark-mode .sidebar .pro-menu ul,
+.dark-mode .sidebar .pro-menu li,
+.dark-mode .sidebar .pro-menu div,
+.dark-mode .sidebar .pro-menu a {
     background: transparent !important;
     background-color: transparent !important;
     color: var(--text-dark) !important;
@@ -194,16 +192,16 @@
     box-shadow: none !important;
 }
 
-.sidebar .pro-menu .pro-inner-list,
-.sidebar .pro-menu .pro-inner-list > li,
-.sidebar .pro-menu .pro-inner-list li {
+.dark-mode .sidebar .pro-menu .pro-inner-list,
+.dark-mode .sidebar .pro-menu .pro-inner-list > li,
+.dark-mode .sidebar .pro-menu .pro-inner-list li {
     background: transparent !important;
 }
 
-.sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
+.dark-mode .sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.sidebar * {
+.dark-mode .sidebar * {
     background-repeat: no-repeat !important;
 }
