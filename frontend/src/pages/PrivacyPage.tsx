@@ -31,7 +31,7 @@ const PrivacyPage: React.FC = () => {
                         Allow profile to be discoverable
                     </label>
 
-                    <p className="small" style={{ marginTop: 12 }}>
+                    <p className="small" style={{ marginTop: 12, color: 'purple' }}>
                         These settings are local placeholders. To persist them, integrate with your
                         backend or a user-preferences storage.
                     </p>

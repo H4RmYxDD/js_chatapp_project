@@ -8,7 +8,6 @@ const applyDark = (on: boolean) => {
         if (on) document.documentElement.classList.add('dark-mode');
         else document.documentElement.classList.remove('dark-mode');
     } catch (e) {
-        /* ignore */
     }
 };
 
@@ -75,7 +74,7 @@ const PreferencesPage: React.FC = () => {
                         Show timestamps on messages
                     </label>
 
-                    <p className="small" style={{ marginTop: 12 }}>
+                    <p className="small" style={{ marginTop: 12, color: 'purple' }}>
                         Preferences are stored locally in your browser. They affect how the UI
                         renders on this device.
                     </p>
