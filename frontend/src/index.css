@@ -1,10 +1,8 @@
-/* page container */
 .main-content {
   min-height: calc(100vh - 90px);
   padding-top: 24px;
 }
 
-/* layout with optional sidebar */
 .app-grid {
   display:grid;
   grid-template-columns: 260px 1fr;
@@ -12,7 +10,6 @@
   align-items:start;
 }
 
-/* sidebar */
 .sidebar {
   width:100%;
 }
@@ -25,7 +22,6 @@
 }
 .logout-area { margin-top:auto; padding:14px; }
 
-/* threads list */
 .threads-list {
   display:flex;
   flex-direction:column;

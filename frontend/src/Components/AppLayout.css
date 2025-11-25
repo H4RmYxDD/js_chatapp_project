@@ -1,10 +1,8 @@
-/* page container */
 .main-content {
     min-height: calc(100vh - 90px);
     padding-top: 24px;
 }
 
-/* header logo adjustments */
 .app-header {
     padding: 12px 0;
 }
@@ -19,7 +17,6 @@
     align-items: center;
 }
 
-/* layout with optional sidebar */
 .app-grid {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -27,7 +24,6 @@
     align-items: start;
 }
 
-/* sidebar */
 .sidebar {
     width: 100%;
 }
@@ -133,9 +129,6 @@
     }
 }
 
-/* Strong overrides for react-pro-sidebar to prevent white submenu panels
-   and ensure consistent dark appearance and contrast. Placed here so
-   AppLayout (global wrapper) enforces the same look as page-local styles. */
 .sidebar .pro-sidebar-inner,
 .sidebar.pro-sidebar,
 .sidebar .pro-menu,
@@ -148,14 +141,12 @@
 }
 
 .sidebar .pro-sidebar-inner {
-    /* Solid dark fallback so there is no light/grey band */
     background: linear-gradient(180deg, #13395e 0%, #0f2b44 100%) !important;
     background-color: rgba(15, 35, 60, 0.98) !important;
     overflow-y: auto !important;
 }
 
 .sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
-    /* Ensure submenu list sits on the same panel color as the sidebar */
     background: var(--panel-bg) !important;
     background-color: var(--panel-bg) !important;
     color: var(--text-dark) !important;
@@ -172,13 +163,11 @@
     color: var(--text) !important;
 }
 
-/* reduce the large empty white block by ensuring submenu panels don't get a forced white background */
 .pro-sub-menu-list,
 .pro-sub-menu {
     background: transparent !important;
 }
 
-/* subtle scrollbar that's visible but not intrusive */
 .sidebar .pro-sidebar-inner::-webkit-scrollbar {
     width: 10px;
 }
@@ -193,8 +182,6 @@
     background: rgba(255, 255, 255, 0.06);
 }
 
-/* Even broader overrides to guarantee nested lists/containers inside the
-   sidebar don't render white backgrounds from library defaults. */
 .sidebar .pro-menu,
 .sidebar .pro-menu ul,
 .sidebar .pro-menu li,
@@ -217,8 +204,6 @@
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* If the library outputs inline styles on deep children, these rules
-   help ensure the visual stays on the dark panel. */
 .sidebar * {
     background-repeat: no-repeat !important;
 }

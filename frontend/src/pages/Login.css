@@ -5,7 +5,6 @@
   --text-dark: #e6eef8;
 }
 
-/* page wrapper centers only the login card */
 .login-wrapper {
   min-height: 100vh;
   display: flex;
@@ -26,7 +25,6 @@
   box-shadow: 0 18px 40px rgba(2,6,23,0.6);
 }
 
-/* left visual panel */
 .login-left {
   flex: 1 1 300px;
   min-width: 260px;
@@ -40,7 +38,6 @@
   background: var(--panel-bg);
 }
 
-/* right form panel */
 .login-right {
   width: 420px;
   max-width: 50%;
@@ -53,10 +50,8 @@
   color: var(--text-dark);
 }
 
-/* heading spacing */
 .login-right h3 { margin: 0 0 8px 0; }
 
-/* form layout: block labels + full-width inputs */
 .login-form { display: flex; flex-direction: column; gap: 10px; }
 .login-form label {
   display: block;
@@ -76,7 +71,6 @@
   box-sizing: border-box;
 }
 
-/* primary button: full width */
 .btn-primary {
   width: 100%;
   padding: 10px 14px;
@@ -88,10 +82,8 @@
   color: #fff;
 }
 
-/* small helper text */
 .small { color: rgba(230,238,248,0.72); font-size: 13px; }
 
-/* responsive: stack panels on narrow screens */
 @media (max-width: 740px) {
   .login-card { flex-direction: column; width: 92%; }
   .login-left, .login-right { width: 100%; max-width: 100%; padding: 22px; }

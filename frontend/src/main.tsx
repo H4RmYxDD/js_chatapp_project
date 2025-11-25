@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                {/* wrap pages that should show header/sidebar */}
+                {}
                 <Route
                     path="/main"
                     element={

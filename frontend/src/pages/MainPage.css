@@ -176,26 +176,22 @@
     min-height: 100vh;
     transition: margin-left 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
     display: flex;
-    align-items: flex-start; /* keep content at top */
-    justify-content: flex-start; /* left align inside page */
+    align-items: flex-start; 
+    justify-content: flex-start;
     padding: 40px;
     box-sizing: border-box;
 }
 
-/* when sidebar is open: shift the page content to the right */
 body.sidebar-open .main-content {
     margin-left: 240px;
 }
 
-/* constrain inner container so feed doesn't stretch full width */
 .app-container {
     max-width: 920px;
     width: 100%;
     margin: 0 auto;
-    padding: 0; /* we use .main-content padding */
+    padding: 0; 
 }
-
-/* optional: reduce huge logo size if present inside feed */
 .app-container img {
     max-width: 320px;
     height: auto;
@@ -203,7 +199,6 @@ body.sidebar-open .main-content {
     margin: 0 0 18px 0;
 }
 
-/* ...existing code... */
 
 .sidebar-details summary {
     list-style: none;
@@ -252,8 +247,8 @@ body.sidebar-open .main-content {
     min-height: 100vh;
     transition: margin-left 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
     display: flex;
-    align-items: flex-start; /* changed from center */
-    justify-content: flex-start; /* changed from center */
+    align-items: flex-start; 
+    justify-content: flex-start; 
     padding: 40px;
 }
 @media (max-width: 480px) {
@@ -339,8 +334,6 @@ body.sidebar-open .main-content {
     margin-bottom: 8px;
 }
 
-/* Strong overrides for react-pro-sidebar to prevent white submenu panels
-   and ensure consistent dark appearance and contrast. */
 .sidebar .pro-sidebar-inner,
 .sidebar.pro-sidebar,
 .sidebar .pro-menu,
@@ -353,14 +346,12 @@ body.sidebar-open .main-content {
 }
 
 .sidebar .pro-sidebar-inner {
-    /* Solid dark fallback so there is no light/grey band */
     background: linear-gradient(180deg, #13395e 0%, #0f2b44 100%) !important;
     background-color: rgba(15, 35, 60, 0.98) !important;
     overflow-y: auto !important;
 }
 
 .sidebar .pro-menu .pro-sub-menu .pro-sub-menu-list {
-    /* Ensure submenu list sits on the same panel color as the sidebar */
     background: var(--panel-bg) !important;
     background-color: var(--panel-bg) !important;
     color: var(--text-dark) !important;
@@ -377,13 +368,11 @@ body.sidebar-open .main-content {
     color: var(--text) !important;
 }
 
-/* reduce the large empty white block by ensuring submenu panels don't get a forced white background */
 .pro-sub-menu-list,
 .pro-sub-menu {
     background: transparent !important;
 }
 
-/* subtle scrollbar that's visible but not intrusive */
 .sidebar .pro-sidebar-inner::-webkit-scrollbar {
     width: 10px;
 }
@@ -401,8 +390,6 @@ body.sidebar-open .main-content {
 .thread-time {
     margin-left: auto;
 
-    /* Broad fallbacks: force any nested lists or containers inside the sidebar
-   to inherit the dark panel background and remove forced white blocks. */
     .sidebar .pro-menu,
     .sidebar .pro-menu ul,
     .sidebar .pro-menu li,
@@ -421,12 +408,10 @@ body.sidebar-open .main-content {
         background: transparent !important;
     }
 
-    /* Make submenu text more legible on dark bg */
     .sidebar .pro-menu .pro-sub-menu .pro-menu-item > .pro-inner-item {
         color: rgba(255, 255, 255, 0.9) !important;
     }
 
-    /* Prevent any default white background on <details> fallback panels */
     .sidebar-details,
     .sidebar-details * {
         background: transparent !important;

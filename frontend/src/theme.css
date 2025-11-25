@@ -1,10 +1,8 @@
-/* page container */
 .main-content {
     min-height: calc(100vh - 90px);
     padding-top: 24px;
 }
 
-/* layout with optional sidebar */
 .app-grid {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -12,7 +10,6 @@
     align-items: start;
 }
 
-/* sidebar */
 .sidebar {
     width: 100%;
 }
@@ -28,7 +25,6 @@
     padding: 14px;
 }
 
-/* threads list */
 .threads-list {
     display: flex;
     flex-direction: column;
@@ -56,7 +52,6 @@
     white-space: pre-wrap;
 }
 
-/* small composer */
 .message-composer {
     display: flex;
     gap: 8px;
@@ -72,14 +67,12 @@
     color: var(--text);
 }
 
-/* responsive */
 @media (max-width: 900px) {
     .app-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* Global color variables (light defaults) */
 :root {
     --bg: #ffffff;
     --panel-bg: linear-gradient(135deg, #7b61ff, #ff6bb5);
@@ -90,7 +83,6 @@
     --muted: rgba(15, 45, 68, 0.6);
 }
 
-/* Dark mode overrides - applied when <html> has class "dark-mode" */
 .dark-mode {
     --bg: #071226;
     --panel-bg: linear-gradient(135deg, #2b3350, #0f2540);
@@ -103,13 +95,11 @@
     color: var(--text);
 }
 
-/* Apply background using variables */
 body {
     background-color: var(--bg);
     color: var(--text);
 }
 
-/* Some common components use vars — ensure they look correct in dark mode */
 .dark-mode .login-right,
 .dark-mode .login-card,
 .dark-mode .thread-card,

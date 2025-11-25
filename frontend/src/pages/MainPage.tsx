@@ -1,4 +1,3 @@
-// ...existing code...
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
@@ -35,7 +34,6 @@ const MainPage: React.FC = () => {
             .finally(() => {
                 if (!canceled) setLoading(false);
             });
-        // also fetch users so we can map senderId -> username
         apiClient
             .get('/users')
             .then((res) => {
@@ -58,7 +56,6 @@ const MainPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        // listen for preference changes (other tabs or preferences page)
         const handler = () => {
             try {
                 const v = localStorage.getItem('prefs_showTimestamps');
@@ -154,4 +151,3 @@ const MainPage: React.FC = () => {
 };
 
 export default MainPage;
-// ...existing code...

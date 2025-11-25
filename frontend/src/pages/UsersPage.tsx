@@ -9,7 +9,7 @@ const UsersPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>();
     const navigate = useNavigate();
 
-    const currentUserId = Number(localStorage.getItem('userId')); // kell hogy magadat kiszűrd
+    const currentUserId = Number(localStorage.getItem('userId'));
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -41,7 +41,7 @@ const UsersPage: React.FC = () => {
     };
 
     const generateCard = (u: User) => {
-        if (u.id === currentUserId) return null; // ne lásd saját magad
+        if (u.id === currentUserId) return null;
 
         return (
             <Col key={u.id}>

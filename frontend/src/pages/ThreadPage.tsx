@@ -40,7 +40,6 @@ const ThreadPage: React.FC = () => {
             })
             .then(() => {
                 setReplyContent('');
-                // Refresh thread
                 apiClient.get(`/messages/thread/${id}`).then((res) => setThread(res.data));
             });
     };
