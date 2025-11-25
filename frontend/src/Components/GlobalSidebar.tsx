@@ -71,9 +71,6 @@ const GlobalSidebar: React.FC = () => {
                         <MenuItem component={<Link to="/settings/profile" onClick={close} />}>
                             Profile
                         </MenuItem>
-                        <MenuItem component={<Link to="/settings/privacy" onClick={close} />}>
-                            Privacy
-                        </MenuItem>
                         <MenuItem component={<Link to="/settings/preferences" onClick={close} />}>
                             Preferences
                         </MenuItem>

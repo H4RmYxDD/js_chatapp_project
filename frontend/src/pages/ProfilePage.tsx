@@ -45,6 +45,7 @@ const ProfilePage: React.FC = () => {
                         className="form-input"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        style={{ border: '1px solid purple' , color: 'pink'}}
                     />
 
                     <label style={{ display: 'block', marginTop: 12 }}>Email</label>
@@ -52,6 +53,7 @@ const ProfilePage: React.FC = () => {
                         className="form-input"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        style={{ border: '1px solid purple', color: 'pink' }}
                     />
 
                     <label style={{ display: 'block', marginTop: 12 }}>
@@ -62,6 +64,7 @@ const ProfilePage: React.FC = () => {
                         className="form-input"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        style={{ border: '1px solid purple', color: 'pink' }}
                     />
 
                     <div style={{ height: 12 }} />

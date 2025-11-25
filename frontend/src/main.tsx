@@ -11,7 +11,6 @@ import UsersPage from './pages/UsersPage.tsx';
 import ConversationPage from './pages/ConversationPage.tsx';
 import ThreadPage from './pages/ThreadPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
-import PrivacyPage from './pages/PrivacyPage.tsx';
 import PreferencesPage from './pages/PreferencesPage.tsx';
 import AppLayout from './Components/AppLayout.tsx';
 
@@ -60,14 +59,6 @@ createRoot(document.getElementById('root')!).render(
                     element={
                         <AppLayout>
                             <ProfilePage />
-                        </AppLayout>
-                    }
-                />
-                <Route
-                    path="/settings/privacy"
-                    element={
-                        <AppLayout>
-                            <PrivacyPage />
                         </AppLayout>
                     }
                 />
