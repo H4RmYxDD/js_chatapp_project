@@ -1,6 +1,6 @@
 # js_chatapp_project
-feladat:
-15. Felhasználók közti üzenetküldő rendszerA regisztrált felhasználók egymásnak üzeneteket küldhetnek.
+
+feladat: 15. Felhasználók közti üzenetküldő rendszerA regisztrált felhasználók egymásnak üzeneteket küldhetnek.
 Minden üzenethez tartozhatnak válaszok (thread jelleggel), így beszélgetések láncolata alakulhat ki.
 Nincs valós idejű frissítés – a kliens időnként lekéri az adatokat.
 
@@ -25,3 +25,11 @@ Felhasználólista oldal - Összes regisztrált felhasználó megjelenítése (k
 Minden üzenethez: küldő neve, időpont, tartalom, „Válasz” gomb
 Üzenetszál nézet - Egy üzenet és az arra érkezett válaszok
 Új válasz
+
+elso bemutato utani javitas:
+1: sotet modban nem latszik h sent vagy received a message
+2: nem tudok felhasznalo adatokat modositani, (valahol elhasal a backend)
+3: esetleges tovabbfejlesztesek jok lennenek
+4: telefonon hitvany szar az egesz
+5: ha nagyon nagyon nagyoooon sok valasz erkezik akkor okadek fos
+6: valos ideju frissites (ha raveszen magam megtanulni)
