@@ -205,3 +205,29 @@
 .dark-mode .sidebar * {
     background-repeat: no-repeat !important;
 }
+
+#layout-root {
+    min-height: 100vh;
+    background: var(--bg, #0b1426);
+}
+
+.sidebar-open .main-content {
+    margin-left: 260px;
+}
+
+.sidebar-closed .main-content {
+    margin-left: 0;
+}
+
+@media (max-width: 900px) {
+    .sidebar-open .main-content,
+    .sidebar-closed .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+.main-content {
+    transition: margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+    padding: 24px;
+}

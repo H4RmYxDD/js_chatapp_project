@@ -1,6 +1,7 @@
 import * as User from '../data/users.js';
 import jws from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import 'dotenv/config';
 
 const auth = async (req, res, next) => {
     const authHeader = req.headers.authorization;

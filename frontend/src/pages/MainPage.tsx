@@ -112,7 +112,7 @@ const MainPage: React.FC = () => {
                         className="btn btn-sm"
                         onClick={() => navigate(`/messages/thread/${msg.id}`)}
                         aria-label={`Reply to message ${msg.id}`}
-                        style={{ marginLeft: 'auto' }}
+                        style={{ marginLeft: 'auto', color: 'purple', backgroundColor: 'transparent' }}
                     >
                         Reply
                     </button>
