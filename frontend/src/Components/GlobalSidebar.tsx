@@ -40,7 +40,7 @@ const GlobalSidebar: React.FC = () => {
                 }}
                 aria-label="Toggle menu"
             >
-                {open ? '×' : 'Menu'}
+                {open ? '×' : '...'}
             </button>
 
             {}
